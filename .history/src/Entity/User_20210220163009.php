@@ -39,11 +39,6 @@ class User implements UserInterface
      */
     private $created_at;
 
-    /**
-     * @ORM\Column(type="datetime", nullable=true, options={"default": "CURRENT_TIMESTAMP"})
-     */
-    private $updated_at;
-
     public function getId(): ?int
     {
         return $this->id;
