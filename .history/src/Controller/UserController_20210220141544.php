@@ -14,8 +14,8 @@ class UserController extends AbstractController {
         $logger->info("Finding users");
 
         if(count($users) === 0) {
-            $logger->warning("No users");
-            return new Response('Could not find any users', 404);
+            $logger->warn("No users");
+            return new Response('Could not find any users');
         }
 
         return $this->render('users/index.html.twig', [
