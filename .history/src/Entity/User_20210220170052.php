@@ -110,15 +110,7 @@ class User implements UserInterface
     }
 
     public function setCreatedAt($created_at): void {
-        $this->created_at = $created_at;
-    }
-
-    public function getUpdatedAt(): string {
-        return $this->updated_at->getTimestamp();
-    }
-
-    public function setUpdatedAt($updated_at): void {
-        $this->updated_at = $updated_at;
+        $this->
     }
 
     /**
