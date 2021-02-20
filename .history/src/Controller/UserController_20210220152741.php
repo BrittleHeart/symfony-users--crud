@@ -34,20 +34,18 @@ class UserController extends AbstractController {
 
     function store(Request $request, LoggerInterface $logger, EntityManagerInterface $entityManager): Response {
         $new_user = new User();
-        $token = $request->request->get('token');
+        $token = $request->request->get('token')
 
-        if($this->isCsrfTokenValid('create-user', $token)) {
-            $new_user->setName($request->request->get('name'));
-            $new_user->setEmail($request->request->get('email'));
-            $new_user->setPassword($request->request->get('password'));
-            $new_user->setCreatedAt(new \DateTime());
-    
-            $entityManager->persist($new_user);
-            $entityManager->flush();
-    
-            return new RedirectResponse('/');
-        }
+        if($this->isCsrfTokenValid('create-user', $token))
 
-        return new Response('Invalid CSRF Token');
+        $new_user->setName($request->request->get('name'));
+        $new_user->setEmail($request->request->get('email'));
+        $new_user->setPassword($request->request->get('password'));
+        $new_user->setCreatedAt(new \DateTime());
+
+        $entityManager->persist($new_user);
+        $entityManager->flush();
+
+        return new RedirectResponse('/');
     }
 }

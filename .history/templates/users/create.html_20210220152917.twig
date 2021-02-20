@@ -5,8 +5,8 @@
     <hr>
 
 	<form action="/store" method="post">
-        <input type="hidden" name="token" value="{{ csrf_token('create-user') }}"/>
-
+        <input type="hidden" name="token" value="{{ csrf_token('delete-item') }}"/>
+        
 		<div class="mb-3">
 			<label for="exampleInputEmail1" class="form-label">Name</label>
 			<input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="nameHelp" name="name">

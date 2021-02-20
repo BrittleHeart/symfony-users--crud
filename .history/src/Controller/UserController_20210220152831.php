@@ -34,7 +34,7 @@ class UserController extends AbstractController {
 
     function store(Request $request, LoggerInterface $logger, EntityManagerInterface $entityManager): Response {
         $new_user = new User();
-        $token = $request->request->get('token');
+        $token = $request->request->get('token')
 
         if($this->isCsrfTokenValid('create-user', $token)) {
             $new_user->setName($request->request->get('name'));
