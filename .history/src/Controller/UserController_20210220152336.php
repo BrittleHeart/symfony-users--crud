@@ -42,6 +42,6 @@ class UserController extends AbstractController {
         $entityManager->persist($new_user);
         $entityManager->flush();
 
-        return new RedirectResponse('/');
+        return RedirectResponse('/');
     }
 }
