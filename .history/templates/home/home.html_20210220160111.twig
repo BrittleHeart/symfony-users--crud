@@ -1,0 +1,66 @@
+{% extends 'home.html.twig' %}
+
+{% block body %}
+
+	<header class="p-5 bg-light text-center">
+		<h1 class="jumbotron-header">Welcome to userland</h1>
+		<p class="jumbotron-description">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Totam aut ducimus repellat, dignissimos dolor itaque iusto! Ipsam at dicta, molestiae, maxime possimus, amet laudantium voluptatum cupiditate suscipit earum repellendus autem.</p>
+	</header>
+
+	<main class="main my-5">
+		<div class="container">
+			<h2 class="text-muted">See what we got</h2>
+			<div class="row mt-5">
+				<div class="col-md-3 text-center p-4">
+					<img src="https://unsplash.it/200/200" class="rounded img-responsive" alt="Some cool image">
+					<p class="mt-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt, eligendi?</p>
+				</div>
+				<div class="col-md-3 text-center p-4">
+					<img src="https://unsplash.it/200/200" class="rounded img-responsive" alt="Some cool image">
+					<p class="mt-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt, eligendi?</p>
+				</div>
+				<div class="col-md-3 text-center p-4">
+					<img src="https://unsplash.it/200/200" class="rounded img-responsive" alt="Some cool image">
+					<p class="mt-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt, eligendi?</p>
+				</div>
+				<div class="col-md-3 text-center p-4">
+					<img src="https://unsplash.it/200/200" class="rounded img-responsive" alt="Some cool image">
+					<p class="mt-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt, eligendi?</p>
+				</div>
+			</div>
+
+			<h2 class="text-muted">This our thing!</h2>
+			<div class="d-flex ">
+				<div class="first bg-light" style=">
+					<h3 class="text-muted">Lets see what i can do for you</h3>
+					<p>
+						Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem expedita commodi nihil vitae voluptate adipisci dolor consequuntur esse accusamus pariatur nobis odio asperiores aspernatur velit harum alias, neque enim tempore. Autem magnam maxime ea pariatur, beatae dolores, molestiae corrupti omnis quam impedit ducimus officia? Numquam nemo consectetur voluptates placeat deserunt.
+					</p>
+				</div>
+				<div class="second">
+					<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+						<div class="carousel-inner">
+							<div class="carousel-item active">
+								<img src="https://unsplash.it/1200/1200" class="d-block w-100" alt="Some cool photos">
+							</div>
+							<div class="carousel-item">
+								<img src="https://unsplash.it/1200/1200" class="d-block w-100" alt="Some cool photos">
+							</div>
+							<div class="carousel-item">
+								<img src="https://unsplash.it/1200/1200" class="d-block w-100" alt="Some cool photos">
+							</div>
+						</div>
+						<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+							<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+							<span class="visually-hidden">Previous</span>
+						</button>
+						<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+							<span class="carousel-control-next-icon" aria-hidden="true"></span>
+							<span class="visually-hidden">Next</span>
+						</button>
+					</div>
+				</div>
+			</div>
+		</main>
+
+	{% endblock %}

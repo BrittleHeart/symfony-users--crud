@@ -1,0 +1,26 @@
+# Main page routes
+home:
+   path: /
+   controller: App
+
+# Users routes
+users__index:
+   path: /users
+   controller: App\Controller\UserController::index
+users__create:
+   path: /users/create
+   controller: App\Controller\UserController::create
+users__store:
+   path: /users/store
+   controller: App\Controller\UserController::store
+   methods: ["POST"]
+
+# Auth routes
+signIn:
+   path: /auth/signIn
+   controller: App\Controller\AuthController::signIn
+   methods: ["GET", "POST"]
+signUp:
+   path: /auth/signUp
+   controller: App\Controller\AuthController::signUp
+   methods: ["GET", "POST"]

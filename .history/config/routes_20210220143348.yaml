@@ -1,0 +1,10 @@
+index:
+   path: /
+   controller: App\Controller\UserController::index
+create:
+   path: /create
+   controller: App\Controller\UserController::create
+store:
+   path: /store
+   controller: App\Controller\UserController::store
+   methods: []
