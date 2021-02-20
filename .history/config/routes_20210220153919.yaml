@@ -1,7 +1,5 @@
 # Main page routes
-home:
-   path: /
-   controller: App\Controller\HomeController::index
+
 
 # Users routes
 users__index:

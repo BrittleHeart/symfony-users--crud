@@ -1,16 +1,11 @@
-# Main page routes
-home:
-   path: /
-   controller: App\Controller\HomeController::index
-
 # Users routes
-users__index:
+index:
    path: /users
    controller: App\Controller\UserController::index
-users__create:
+create:
    path: /users/create
    controller: App\Controller\UserController::create
-users__store:
+store:
    path: /users/store
    controller: App\Controller\UserController::store
    methods: ["POST"]
