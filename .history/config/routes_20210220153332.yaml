@@ -11,8 +11,4 @@ store:
 signIn:
    path: /auth/signIn
    controller: App\Controller\AuthController::signIn
-   methods: ["GET", "POST"]
-signUp:
-   path: /auth/signUp
-   controller: App\Controller\AuthController::signUp
-   methods: ["GET", "POST"]
+   methods: ["GET"]

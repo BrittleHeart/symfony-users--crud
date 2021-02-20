@@ -12,7 +12,7 @@ signIn:
    path: /auth/signIn
    controller: App\Controller\AuthController::signIn
    methods: ["GET", "POST"]
-signUp:
-   path: /auth/signUp
-   controller: App\Controller\AuthController::signUp
+signIn:
+   path: /auth/signIn
+   controller: App\Controller\AuthController::signIn
    methods: ["GET", "POST"]
