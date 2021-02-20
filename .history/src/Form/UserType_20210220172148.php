@@ -19,10 +19,10 @@ class UserType extends AbstractType
             ->add('email', EmailType::class)
             ->add('roles', TextType::class)
             ->add('password', RepeatedType::class, [
-                'type' => PasswordType::class,
-                'first_options' => ['label' => 'Password'],
-                'second_options' => ['label' => 'Confirm Password']
+                
             ])
+            ->add('created_at')
+            ->add('updated_at')
         ;
     }
 

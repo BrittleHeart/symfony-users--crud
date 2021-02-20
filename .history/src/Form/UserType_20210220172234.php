@@ -23,6 +23,8 @@ class UserType extends AbstractType
                 'first_options' => ['label' => 'Password'],
                 'second_options' => ['label' => 'Confirm Password']
             ])
+            ->add('created_at')
+            ->add('updated_at')
         ;
     }
 

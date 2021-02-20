@@ -21,8 +21,10 @@ class UserType extends AbstractType
             ->add('password', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'first_options' => ['label' => 'Password'],
-                'second_options' => ['label' => 'Confirm Password']
+                'second_options' => ['']
             ])
+            ->add('created_at')
+            ->add('updated_at')
         ;
     }
 

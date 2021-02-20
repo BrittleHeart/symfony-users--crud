@@ -35,7 +35,7 @@ class RegistrationController extends AbstractController
 
             // Set their role
             $user->setRoles(['ROLE_USER']);
-            $user->setCreatedAt(new \DateTime());
+            $user->setCreatedAt
 
             // Save
             $em = $this->getDoctrine()->getManager();
