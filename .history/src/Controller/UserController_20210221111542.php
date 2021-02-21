@@ -94,8 +94,7 @@ class UserController extends AbstractController {
 
         if(!$this->isCsrfTokenValid('csrf_update-user', $token))
         {
-            $this->logger->critical('CSRF token is invalid');
-            throw new InvalidCsrfTokenException();
+            throw new InvalidC('')
         }
 
         $id = htmlspecialchars($request->query->get('id'));

@@ -3,27 +3,22 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpKernel\Exception\HttpException;
-use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityManagerInterface;
-use UnexpectedValueException;
 use Psr\Log\LoggerInterface;
 use App\Entity\User;
 use LogicException;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use Symfony\Component\Security\Core\Exception\InvalidCsrfTokenException;
+use UnexpectedValueException;
 
 class UserController extends AbstractController {
     private LoggerInterface $logger;
-    private UserPasswordEncoderInterface $encoder;
 
-    public function __construct(LoggerInterface $loggerInterface, UserPasswordEncoderInterface $encoder)
+    public function __construct(LoggerInterface $loggerInterface)
     {
         $this->logger = $loggerInterface;
-        $this->encoder = $encoder;
     }
 
     function index()
@@ -76,48 +71,10 @@ class UserController extends AbstractController {
         ]);
     }
 
-    /**
-     * @Route("/users/{id}", name="user-update", methods="PUT")
-     * 
-     * 
-     * Updates user's password
-     * 
-     * @param Request $request 
-     * @param EntityManagerInterface $entityManagerInterface 
-     * @param int $id 
-     * @return Response 
-     * @throws NotFoundHttpException 
-     */
-    public function update(Request $request, EntityManagerInterface $entityManagerInterface, int $id): Response
+
+    public function update(Request $request, EntityManagerInterface $entityManagerInterface, int $id)
     {
-        $token = $request->request->get('csrf_update-user');
-
-        if(!$this->isCsrfTokenValid('csrf_update-user', $token))
-        {
-            $this->logger->critical('CSRF token is invalid');
-            throw new InvalidCsrfTokenException();
-        }
-
-        $id = htmlspecialchars($request->query->get('id'));
-
-        $user = $entityManagerInterface
-                    ->getRepository(User::class)
-                    ->find(intval($id));
-
-        if(!$user)
-        {
-            $this->logger->error("User with id = $id does not exists");
-            throw new NotFoundHttpException('Could not find user');
-        }
-
-        $password = htmlspecialchars($request->request->get('password'));
-
-        $user->password = $user->setPassword($this->encoder->encodePassword($user, $password));
-
-        $entityManagerInterface->persist($user);
-        $entityManagerInterface->flush();
-
-        return $this->redirect('/users');
+        $user = $entityManagerInterface->find(intval($id);
     }
 
     /**

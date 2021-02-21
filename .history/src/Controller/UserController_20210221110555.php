@@ -14,7 +14,6 @@ use App\Entity\User;
 use LogicException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use Symfony\Component\Security\Core\Exception\InvalidCsrfTokenException;
 
 class UserController extends AbstractController {
     private LoggerInterface $logger;
@@ -76,28 +75,9 @@ class UserController extends AbstractController {
         ]);
     }
 
-    /**
-     * @Route("/users/{id}", name="user-update", methods="PUT")
-     * 
-     * 
-     * Updates user's password
-     * 
-     * @param Request $request 
-     * @param EntityManagerInterface $entityManagerInterface 
-     * @param int $id 
-     * @return Response 
-     * @throws NotFoundHttpException 
-     */
+
     public function update(Request $request, EntityManagerInterface $entityManagerInterface, int $id): Response
     {
-        $token = $request->request->get('csrf_update-user');
-
-        if(!$this->isCsrfTokenValid('csrf_update-user', $token))
-        {
-            $this->logger->critical('CSRF token is invalid');
-            throw new InvalidCsrfTokenException();
-        }
-
         $id = htmlspecialchars($request->query->get('id'));
 
         $user = $entityManagerInterface
@@ -107,17 +87,10 @@ class UserController extends AbstractController {
         if(!$user)
         {
             $this->logger->error("User with id = $id does not exists");
-            throw new NotFoundHttpException('Could not find user');
+            throw new NotFoundHttpException(404, 'Could not find user');
         }
 
-        $password = htmlspecialchars($request->request->get('password'));
-
-        $user->password = $user->setPassword($this->encoder->encodePassword($user, $password));
-
-        $entityManagerInterface->persist($user);
-        $entityManagerInterface->flush();
-
-        return $this->redirect('/users');
+        $user->password = $user->setPassword($this->encoder->encodePassword())
     }
 
     /**

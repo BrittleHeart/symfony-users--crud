@@ -14,7 +14,6 @@ use App\Entity\User;
 use LogicException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use Symfony\Component\Security\Core\Exception\InvalidCsrfTokenException;
 
 class UserController extends AbstractController {
     private LoggerInterface $logger;
@@ -77,10 +76,6 @@ class UserController extends AbstractController {
     }
 
     /**
-     * @Route("/users/{id}", name="user-update", methods="PUT")
-     * 
-     * 
-     * Updates user's password
      * 
      * @param Request $request 
      * @param EntityManagerInterface $entityManagerInterface 
@@ -90,14 +85,6 @@ class UserController extends AbstractController {
      */
     public function update(Request $request, EntityManagerInterface $entityManagerInterface, int $id): Response
     {
-        $token = $request->request->get('csrf_update-user');
-
-        if(!$this->isCsrfTokenValid('csrf_update-user', $token))
-        {
-            $this->logger->critical('CSRF token is invalid');
-            throw new InvalidCsrfTokenException();
-        }
-
         $id = htmlspecialchars($request->query->get('id'));
 
         $user = $entityManagerInterface
