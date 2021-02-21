@@ -35,15 +35,11 @@
 						{% endif %}
 
 						<td>{{user.createdAt|date('Y-m-d H:i:s')}}</td>
-						<td class="d-flex">
+						<td>
 							<a href="{{path('user-edit', {'id': user.id})}}" class="btn btn-primary">edit</a>
 
-							<form action="{{ path('user-delete', {'id': user.id}) }}" method="POST" class="form-inline">
-								<input type="hidden" name="_method" value="DELETE">
-								<input type="hidden" name="csrf_user-delete" value="{{ csrf_token('user-delete') }}">
-
-								<button class="btn btn-danger">remove</button>
-							</form>
+							<form action="{{ path('user-delete', {'id': user.id'}) }}"></form>
+							<a href="{{path('user-delete', {'id': user.id})}}" class="btn btn-danger">remove</a>
 						</td>
 					</tr>
         		{% endfor %}

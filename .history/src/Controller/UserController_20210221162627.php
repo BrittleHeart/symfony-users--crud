@@ -231,8 +231,11 @@ class UserController extends AbstractController {
             throw new NotFoundHttpException("User with id = $id does not exist");
         }
 
-        $entityManagerInterface->remove($user);
-        $entityManagerInterface->flush();
+        try
+        {
+            $entityManagerInterface->remove($user);
+        }
+        catch(ORMException $)
 
         return $this->redirect('/users', 302);
     }

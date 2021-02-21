@@ -16,7 +16,6 @@ use UnexpectedValueException;
 use Psr\Log\LoggerInterface;
 use App\Form\UpdateUserType;
 use App\Entity\User;
-use Doctrine\ORM\ORMException;
 use LogicException;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Core\Exception\InvalidCsrfTokenException;
@@ -231,8 +230,10 @@ class UserController extends AbstractController {
             throw new NotFoundHttpException("User with id = $id does not exist");
         }
 
-        $entityManagerInterface->remove($user);
-        $entityManagerInterface->flush();
+        try
+        {
+            $entityManagerInterface->remove($user);
+        } ca
 
         return $this->redirect('/users', 302);
     }

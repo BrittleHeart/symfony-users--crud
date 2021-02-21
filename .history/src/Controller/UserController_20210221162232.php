@@ -16,10 +16,8 @@ use UnexpectedValueException;
 use Psr\Log\LoggerInterface;
 use App\Form\UpdateUserType;
 use App\Entity\User;
-use Doctrine\ORM\ORMException;
 use LogicException;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
-use Symfony\Component\Security\Core\Exception\InvalidCsrfTokenException;
 
 class UserController extends AbstractController {
 
@@ -218,7 +216,7 @@ class UserController extends AbstractController {
         if(!$this->csrfTokenManagerInterface->isTokenValid($token))
         {
             $this->logger->error("DELETE: Invalid token");
-            throw new InvalidCsrfTokenException("Inavalid CSRF token");
+            
         }
 
         $user = $entityManagerInterface
@@ -232,8 +230,7 @@ class UserController extends AbstractController {
         }
 
         $entityManagerInterface->remove($user);
-        $entityManagerInterface->flush();
 
-        return $this->redirect('/users', 302);
+        return $this->redirect('/users', 200);
     }
 }
