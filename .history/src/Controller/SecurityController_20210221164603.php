@@ -56,9 +56,6 @@ class SecurityController extends AbstractController
      */
     public function register(Request $request): Response
     {
-        if($this->isGranted('IS_AUTHENTICATED_FULLY'))
-            return $this->redirect('/users');
-
         $user = new User();
         
         $form = $this->createForm(UserType::class, $user);

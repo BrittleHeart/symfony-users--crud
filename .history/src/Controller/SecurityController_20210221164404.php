@@ -4,15 +4,12 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\UserType;
-use LogicException as GlobalLogicException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\Exception\LogicException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use UnexpectedValueException;
 
 class SecurityController extends AbstractController
 {
@@ -41,24 +38,9 @@ class SecurityController extends AbstractController
         return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
     }
 
-
-    /**
-     * @Route("/register", name="app_register", methods="GET|POST")
-     * 
-     * 
-     * Shows register page
-     * 
-     * @param Request $request 
-     * @return Response 
-     * @throws LogicException 
-     * @throws GlobalLogicException 
-     * @throws UnexpectedValueException 
-     */
+    
     public function register(Request $request): Response
     {
-        if($this->isGranted('IS_AUTHENTICATED_FULLY'))
-            return $this->redirect('/users');
-
         $user = new User();
         
         $form = $this->createForm(UserType::class, $user);
