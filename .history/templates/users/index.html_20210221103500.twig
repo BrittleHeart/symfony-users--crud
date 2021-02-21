@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+	<div class="d-flex justify-content-between align-items-center">
+		<h1 class="text-muted">Users list</h1>
+		<a href="/create" class="btn btn-outline-secondary align-center">Add new</a>
+	</div>
+
+	<hr>
+
+
+	{% if users|length > 0 %}
+
+		<table class="table">
+			<thead>
+				<tr>
+					<th scope="col">ID</th>
+					<th scope="col">email</th>
+					<th scope="col">roles</th>
+					<th scope="col">created at</th>
+					<th scope="col">actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for user in users %}
+					<tr>
+						<th scope="row">{{user.id}}</th>
+						<td>{{user.email}}</td>
+
+						{% if is_granted('ROLE_USER') %}
+						<td>User</td>
+						{% elseif is_granted('ROLE_ADMIN') %}
+						<td>Admin</td>
+						{% endif %}
+
+						<td>{{user.createdAt|date('Y-m-d H:i:s')}}</td>
+						<td>
+							<a href="{{path('user-edit', {'id': user.id})}}" class="btn btn-primary">edit</a>
+							<a href="{{path('delete-edit', {'id': user.id})}}" class="btn btn-danger">remove</a>
+						</td>
+					</tr>
+        		{% endfor %}
+				</tbody>
+			</tbody>
+		</table>
+
+	{% else %}
+		<h1>No users found</h1>
+	{% endif %}
+
+
+{% endblock %}

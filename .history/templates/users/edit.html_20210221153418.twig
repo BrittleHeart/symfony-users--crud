@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<h1>Edit user with id = {{id}}</h1>
+
+{% if app.t %}
+<div class="alert alert-danger">{{error}}</div>
+{% endif %}
+
+{{ form_start(form, {method: 'PUT'}) }}
+    <div class="mb-3">
+        {{ form_row(form.password, {'attr': {'class': 'form-control'}}) }}
+        {{ form_row(form.update, {'attr': {'class': 'btn btn-primary'}}) }}
+    </div>
+{{ form_end(form) }}
+
+
+{% endblock %}

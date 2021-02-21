@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<h1>Edit user with id = {{id}}</h1>
+
+{{ form_start(form, {method: 'PUT', action: path('user-update', id)}) }}
+    <div class="mb-3">
+        {{ form_row(form.password, {'attr': {'class': 'form-control'}}) }}
+        {{ form_row(form.update, {'attr': {'class': 'btn btn-primary'}}) }}
+    </div>
+{{ form_end(form) }}
+
+{# <form action="{{path('user-update', {'id': id})}}" method="post">
+    <input type="hidden" name="csrf_update-user" value="{{ csrf_token('csrf_update-user') }}"/>
+
+    <input type="hidden" name="_method" value="put">
+
+    <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Password</label>
+        <input type="password" class="form-control" id="exampleInputPassword1" name="password">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form> #}
+
+
+
+{% endblock %}
