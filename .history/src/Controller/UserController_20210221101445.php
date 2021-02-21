@@ -41,23 +41,21 @@ class UserController extends AbstractController {
     }
 
     /**
-     * @Route("/users/edit/{id}", name="user-edit", methods="GET")
+     * @Route("/users/edit/{id}", name="user-edit", methods="GET|POST")
      * 
      * 
      * Allows edit user with form
      * 
      * @param EntityManagerInterface $entityManagerInterface 
-     * @param int $id 
+     * @param mixed $id 
      * @return Response 
      * @throws LogicException 
      * @throws UnexpectedValueException
      * 
      */
-    public function edit(EntityManagerInterface $entityManagerInterface, int $id): Response
+    public function edit(EntityManagerInterface $entityManagerInterface, $id): Response
     {
-        $user = $entityManagerInterface
-                    ->getRepository(User::class)
-                    ->find(intval($id));
+        $user = $entityManagerInterface->getRepository(User::class)->find($id);
 
         if(!$user)
         {
@@ -66,8 +64,7 @@ class UserController extends AbstractController {
         }
 
         return $this->render('users/edit.html.twig', [
-            "user" => $user,
-            "id" => $id
+            "user" => $user
         ]);
     }
 }

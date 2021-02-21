@@ -56,8 +56,7 @@ class UserController extends AbstractController {
     public function edit(EntityManagerInterface $entityManagerInterface, int $id): Response
     {
         $user = $entityManagerInterface
-                    ->getRepository(User::class)
-                    ->find(intval($id));
+        ->getRepository(User::class)->find($id);
 
         if(!$user)
         {
@@ -66,8 +65,7 @@ class UserController extends AbstractController {
         }
 
         return $this->render('users/edit.html.twig', [
-            "user" => $user,
-            "id" => $id
+            "user" => $user
         ]);
     }
 }

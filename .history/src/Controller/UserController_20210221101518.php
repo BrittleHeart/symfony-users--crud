@@ -47,7 +47,7 @@ class UserController extends AbstractController {
      * Allows edit user with form
      * 
      * @param EntityManagerInterface $entityManagerInterface 
-     * @param int $id 
+     * @param mixed $id 
      * @return Response 
      * @throws LogicException 
      * @throws UnexpectedValueException
@@ -55,9 +55,7 @@ class UserController extends AbstractController {
      */
     public function edit(EntityManagerInterface $entityManagerInterface, int $id): Response
     {
-        $user = $entityManagerInterface
-                    ->getRepository(User::class)
-                    ->find(intval($id));
+        $user = $entityManagerInterface->getRepository(User::class)->find($id);
 
         if(!$user)
         {
@@ -66,8 +64,7 @@ class UserController extends AbstractController {
         }
 
         return $this->render('users/edit.html.twig', [
-            "user" => $user,
-            "id" => $id
+            "user" => $user
         ]);
     }
 }
