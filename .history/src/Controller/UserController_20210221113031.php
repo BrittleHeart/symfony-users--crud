@@ -95,7 +95,7 @@ class UserController extends AbstractController {
         if(!$this->isCsrfTokenValid('csrf_update-user', $token))
         {
             $this->logger->critical('CSRF token is invalid');
-            return new Response('CSRF Token is invalid <a href="/users">Back</a>', 403);
+            return new Response('CSRF Token is invalid');
         }
 
         $user = $entityManagerInterface

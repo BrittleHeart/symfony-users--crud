@@ -95,12 +95,14 @@ class UserController extends AbstractController {
         if(!$this->isCsrfTokenValid('csrf_update-user', $token))
         {
             $this->logger->critical('CSRF token is invalid');
-            return new Response('CSRF Token is invalid <a href="/users">Back</a>', 403);
+            return new InvalidCsrfTokenException();
         }
+
+        $id = htmlspecialchars($request->query->get('id'));
 
         $user = $entityManagerInterface
                     ->getRepository(User::class)
-                    ->find($id);
+                    ->find(intval($id));
 
         if(!$user)
         {
@@ -110,7 +112,7 @@ class UserController extends AbstractController {
 
         $password = htmlspecialchars($request->request->get('password'));
 
-        $user->setPassword($this->encoder->encodePassword($user, $password));
+        $user->password = $user->setPassword($this->encoder->encodePassword($user, $password));
 
         $entityManagerInterface->persist($user);
         $entityManagerInterface->flush();
