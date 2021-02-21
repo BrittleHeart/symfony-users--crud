@@ -23,7 +23,7 @@ class RegistrationController extends AbstractController
      */
     public function index(Request $request)
     {
-        // Close route if authenticated
+// Close route if authenticated
         if($this->isGranted('IS_AUTHENTICATED_FULLY'))
             return $this->redirect('/users');
 

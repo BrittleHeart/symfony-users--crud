@@ -14,8 +14,7 @@ class SecurityController extends AbstractController
      */
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
-        // Close route if authenticated
-        if($this->isGranted('IS_AUTHENTICATED_FULLY'))
+        if($this->isGranted('IS_UIS'))
             return $this->redirect('/users');
 
         // get the login error if there is one
