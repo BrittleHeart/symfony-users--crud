@@ -38,37 +38,34 @@
 						<a href="{{ path('app_login')}} " class="nav-link text-white" aria-current="page">Login</a>
 						<a href="{{ path('app_register')}} " class="nav-link text-white" aria-current="page">Register</a>
 					{% else %}
-						<span class="nav-text text-white">
-							<div class="dropdown">
-								<div class="nav-item text-white dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-									Logged as
-									{{app.user.email}}
-								</div>
+						<span class="nav-text text-white">Logged as
+							<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+								<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+									Dropdown
+								</a>
 								<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-									{% if is_granted('ROLE_ADMIN') %}
 									<li>
-										<a href="" class="dropdown-item">Admin panel</a>
-									</li>
-									{% endif %}
-									<li>
-										<a class="dropdown-item" href="#">Profile</a>
+										<a class="dropdown-item" href="#">Action</a>
 									</li>
 									<li>
-										<a class="dropdown-item" href="#">Mails</a>
+										<a class="dropdown-item" href="#">Another action</a>
 									</li>
 									<li><hr class="dropdown-divider"></li>
 									<li>
-										<a href="{{ path('app_logout') }}" class="dropdown-item" aria-current="page">Logout</a>
+										<a class="dropdown-item" href="#">Something else here</a>
 									</li>
 								</ul>
-							</div>
+							</ul>
+							{{app.user.email}}							
 						</span>
+						<a href="{{ path('app_logout')}} " class="nav-link text-white" aria-current="page">Logout</a>
 					{% endif %}
 				</div>
 			</div>
 		</nav>
 
-		<div class="container my-5"> {% block body %}{% endblock %}
+
+		<div class="wrapper"> {% block body %}{% endblock %}
 			</div>
 		</body>
 	</html>
