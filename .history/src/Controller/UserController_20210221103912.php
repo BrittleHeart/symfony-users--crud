@@ -80,8 +80,8 @@ class UserController extends AbstractController {
      * @param int $id 
      * @return string 
      */
-    public function destroy(int $id): Response
+    public function destroy(int $id): string
     {
-        return new Response("User with id = $id has been deleted", 200);
+        return "User with id = $id has been deleted";
     }
 }

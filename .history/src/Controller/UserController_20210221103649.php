@@ -71,17 +71,6 @@ class UserController extends AbstractController {
         ]);
     }
 
-    /**
-     * @Route("/users/delete/{id}", name="user-delete", methods="GET")
-     * 
-     * 
-     * Relete user
-     * 
-     * @param int $id 
-     * @return string 
-     */
-    public function destroy(int $id): Response
-    {
-        return new Response("User with id = $id has been deleted", 200);
-    }
+    public function destroy(): RedirectResponse
+     {}
 }

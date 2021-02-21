@@ -72,7 +72,7 @@ class UserController extends AbstractController {
     }
 
     /**
-     * @Route("/users/delete/{id}", name="user-delete", methods="GET")
+     * @Route("/users/delete/{id}", name="users-delete" methods="GET")
      * 
      * 
      * Relete user
@@ -80,8 +80,8 @@ class UserController extends AbstractController {
      * @param int $id 
      * @return string 
      */
-    public function destroy(int $id): Response
+    public function destroy(int $id): string
     {
-        return new Response("User with id = $id has been deleted", 200);
+        return "User with id = $id has been deleted";
     }
 }
