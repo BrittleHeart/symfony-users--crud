@@ -29,13 +29,7 @@
 						<td>{{user.email}}</td>
 
 						<td>
-						{% for role in user.getRoles() %}
-							{% if role == 'ROLE_ADMIN' %}
-								<span class="badge bg-dark">Admin</span>
-							{% else %}
-								<span class="badge bg-primary">User</span>
-							{% endif %}
-						{% endfor %}
+						for
 						</td>
 
 						<td>{{user.createdAt|date('Y-m-d H:i:s')}}</td>

@@ -28,15 +28,11 @@
 						<th scope="row">{{user.id}}</th>
 						<td>{{user.email}}</td>
 
-						<td>
-						{% for role in user.getRoles() %}
-							{% if role == 'ROLE_ADMIN' %}
-								<span class="badge bg-dark">Admin</span>
-							{% else %}
-								<span class="badge bg-primary">User</span>
-							{% endif %}
-						{% endfor %}
-						</td>
+						{% if "ROLE_USER" in user.getRoles() %}
+							<td>User</td>
+						{% elseif "ROLE_ADMIN" in user.getRoles %}
+							<td>Admin</td>
+						{% endif %}
 
 						<td>{{user.createdAt|date('Y-m-d H:i:s')}}</td>
 						<td class="d-flex">
@@ -50,14 +46,11 @@
 							</form>
 						</td>
 					</tr>
-        		{% endfor %}
-				</tbody>
+				{% endfor %}
 			</tbody>
-		</table>
+		</tbody>
+	</table>
 
-	{% else %}
-		<h1>No users found</h1>
-	{% endif %}
-
-
-{% endblock %}
+{% else %}
+	<h1>No users found</h1>
+{% endif %}{% endblock %}

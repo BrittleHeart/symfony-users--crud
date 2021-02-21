@@ -28,12 +28,12 @@
 						<th scope="row">{{user.id}}</th>
 						<td>{{user.email}}</td>
 
-						<td>
+						<td>[
 						{% for role in user.getRoles() %}
 							{% if role == 'ROLE_ADMIN' %}
-								<span class="badge bg-dark">Admin</span>
+								Admin
 							{% else %}
-								<span class="badge bg-primary">User</span>
+								User
 							{% endif %}
 						{% endfor %}
 						</td>

@@ -30,11 +30,7 @@
 
 						<td>
 						{% for role in user.getRoles() %}
-							{% if role == 'ROLE_ADMIN' %}
-								<span class="badge bg-dark">Admin</span>
-							{% else %}
-								<span class="badge bg-primary">User</span>
-							{% endif %}
+							{% if role == 'ROLE_ADMIN' %}{% endif %}
 						{% endfor %}
 						</td>
 
