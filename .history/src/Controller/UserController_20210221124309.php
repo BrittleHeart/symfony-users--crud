@@ -18,19 +18,15 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Core\Exception\InvalidCsrfTokenException;
-use Symfony\Component\Security\Csrf\CsrfToken;
-use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 
 class UserController extends AbstractController {
     private LoggerInterface $logger;
     private UserPasswordEncoderInterface $encoder;
-    private CsrfTokenManagerInterface $csrfTokenManagerInterface;
 
-    public function __construct(LoggerInterface $loggerInterface, CsrfTokenManagerInterface $csrfTokenManagerInterface, UserPasswordEncoderInterface $encoder)
+    public function __construct(LoggerInterface $loggerInterface, UserPasswordEncoderInterface $encoder)
     {
         $this->logger = $loggerInterface;
         $this->encoder = $encoder;
-        $this->csrfTokenManagerInterface = $csrfTokenManagerInterface;
     }
 
     function index()
@@ -101,11 +97,12 @@ class UserController extends AbstractController {
      */
     public function update(Request $request, EntityManagerInterface $entityManagerInterface, int $id): Response
     {
-        $form_fields = $request->request->get('update_user');
+        $token = $request->request->get('csrf_user-update');
 
-        $token = new CsrfToken('update-user', $form_fields['_token']);
-        
-        if(!$this->csrfTokenManagerInterface->isTokenValid($token))
+        print_r($request->request->get());
+        die;
+
+        if(!$this->isCsrfTokenValid('user-update', $token))
         {
             $this->logger->critical('CSRF token is invalid');
             return new Response('CSRF Token is invalid <a href="/users">Back</a>', 403);
@@ -121,8 +118,7 @@ class UserController extends AbstractController {
             throw new NotFoundHttpException('Could not find user');
         }
 
-
-        $password = htmlspecialchars($form_fields['password']);
+        $password = htmlspecialchars($request->request->get('update-user'));
         
         $user->setPassword($this->encoder->encodePassword($user, $password));
 

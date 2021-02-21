@@ -104,7 +104,6 @@ class UserController extends AbstractController {
         $form_fields = $request->request->get('update_user');
 
         $token = new CsrfToken('update-user', $form_fields['_token']);
-        
         if(!$this->csrfTokenManagerInterface->isTokenValid($token))
         {
             $this->logger->critical('CSRF token is invalid');

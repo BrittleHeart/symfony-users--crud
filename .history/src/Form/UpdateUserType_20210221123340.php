@@ -25,7 +25,7 @@ class UpdateUserType extends AbstractType
             'data_class'        => User::class,
             'csrf_protection'   => true,
             'csrf_field_name'   => '_token',
-            'csrf_token_id'     => 'update-user',
+            'csrf_token_id'     => 'update-user_token',
         ]);
     }
 }

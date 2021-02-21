@@ -14,6 +14,7 @@ class UpdateUserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->setAction(p)
             ->add('password', PasswordType::class)
             ->add('update', SubmitType::class, ['label' => 'Update user'])
         ;
@@ -22,10 +23,7 @@ class UpdateUserType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class'        => User::class,
-            'csrf_protection'   => true,
-            'csrf_field_name'   => '_token',
-            'csrf_token_id'     => 'update-user',
+            'data_class' => User::class,
         ]);
     }
 }

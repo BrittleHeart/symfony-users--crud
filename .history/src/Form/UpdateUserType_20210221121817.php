@@ -22,10 +22,9 @@ class UpdateUserType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class'        => User::class,
-            'csrf_protection'   => true,
-            'csrf_field_name'   => '_token',
-            'csrf_token_id'     => 'update-user',
+            'data_class' => User::class,
+            'csrf_protection' => true,
+            'csrf_field_name' => 'csrf_user-update'
         ]);
     }
 }

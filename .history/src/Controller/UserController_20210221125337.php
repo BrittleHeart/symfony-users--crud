@@ -18,19 +18,17 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Core\Exception\InvalidCsrfTokenException;
-use Symfony\Component\Security\Csrf\CsrfToken;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 
 class UserController extends AbstractController {
     private LoggerInterface $logger;
     private UserPasswordEncoderInterface $encoder;
-    private CsrfTokenManagerInterface $csrfTokenManagerInterface;
+    private CsrfTokenManagerInterface $csrfTokenManagerInterface
 
     public function __construct(LoggerInterface $loggerInterface, CsrfTokenManagerInterface $csrfTokenManagerInterface, UserPasswordEncoderInterface $encoder)
     {
         $this->logger = $loggerInterface;
         $this->encoder = $encoder;
-        $this->csrfTokenManagerInterface = $csrfTokenManagerInterface;
     }
 
     function index()
@@ -103,9 +101,11 @@ class UserController extends AbstractController {
     {
         $form_fields = $request->request->get('update_user');
 
-        $token = new CsrfToken('update-user', $form_fields['_token']);
-        
-        if(!$this->csrfTokenManagerInterface->isTokenValid($token))
+        $token = $form_fields['_token'];
+        // print_r($token);
+        // die;
+
+        if(!$this->isCsrfTokenValid('_token', $token))
         {
             $this->logger->critical('CSRF token is invalid');
             return new Response('CSRF Token is invalid <a href="/users">Back</a>', 403);

@@ -18,7 +18,6 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Core\Exception\InvalidCsrfTokenException;
-use Symfony\Component\Security\Csrf\CsrfToken;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 
 class UserController extends AbstractController {
@@ -103,8 +102,8 @@ class UserController extends AbstractController {
     {
         $form_fields = $request->request->get('update_user');
 
-        $token = new CsrfToken('update-user', $form_fields['_token']);
-        
+        $token = $form_fields['_token'];
+
         if(!$this->csrfTokenManagerInterface->isTokenValid($token))
         {
             $this->logger->critical('CSRF token is invalid');
