@@ -19,7 +19,7 @@ class Topic
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="text")
      */
     private $title;
 
@@ -42,16 +42,6 @@ class Topic
      * @ORM\Column(type="integer", nullable=true, options={"default": "0"})
      */
     private $likes;
-
-    /**
-     * @ORM\Column(type="datetime", options={"default": "CURRENT_TIMESTAMP"})
-     */
-    private $created_at;
-
-    /**
-     * @ORM\Column(type="datetime", nullable=true, options={"default": "CURRENT_TIMESTAMP"})
-     */
-    private $updated_at;
 
     public function getId(): ?int
     {
@@ -114,30 +104,6 @@ class Topic
     public function setLikes(?int $likes): self
     {
         $this->likes = $likes;
-
-        return $this;
-    }
-
-    public function getCreatedAt(): ?\DateTimeInterface
-    {
-        return $this->created_at;
-    }
-
-    public function setCreatedAt(\DateTimeInterface $created_at): self
-    {
-        $this->created_at = $created_at;
-
-        return $this;
-    }
-
-    public function getUpdatedAt(): ?\DateTimeInterface
-    {
-        return $this->updated_at;
-    }
-
-    public function setUpdatedAt(?\DateTimeInterface $updated_at): self
-    {
-        $this->updated_at = $updated_at;
 
         return $this;
     }
