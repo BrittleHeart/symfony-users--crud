@@ -78,7 +78,7 @@ class UserController extends AbstractController {
 
 
     /**
-     * @Route("admin/users", name="user-index", methods="GET")
+     * @Route("/users", name="user-index", methods="GET")
      * 
      * 
      * Select all users
@@ -108,7 +108,7 @@ class UserController extends AbstractController {
 
 
     /**
-     * @Route("admin/users/edit/{id}", name="user-edit", methods="GET")
+     * @Route("/users/edit/{id}", name="user-edit", methods="GET")
      * 
      * 
      * Allows edit user with form
@@ -134,7 +134,7 @@ class UserController extends AbstractController {
 
         $form = $this->createForm(UpdateUserType::class, $user, ['action' => $this->generateUrl('user-update', ['id' => $id])]);
 
-        return $this->render('administration/users/edit.html.twig', [
+        return $this->render('users/edit.html.twig', [
             "user" => $user,
             "id" => $id,
             "form" => $form->createView(),
@@ -145,7 +145,7 @@ class UserController extends AbstractController {
 
 
     /**
-     * @Route("admin/users/{id}", name="user-update", methods="PUT")
+     * @Route("/users/{id}", name="user-update", methods="PUT")
      * 
      * 
      * Updates user's password
@@ -202,10 +202,10 @@ class UserController extends AbstractController {
 
 
     /**
-     * @Route("admin/users/{id}", name="user-delete", methods="DELETE")
+     * @Route("/users/{id}", name="user-delete", methods="DELETE")
      * 
      * 
-     * Delete user
+     * Relete user
      * 
      * @param int $id 
      * @return string 

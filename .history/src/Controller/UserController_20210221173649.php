@@ -78,7 +78,7 @@ class UserController extends AbstractController {
 
 
     /**
-     * @Route("admin/users", name="user-index", methods="GET")
+     * @Route("/users", name="user-index", methods="GET")
      * 
      * 
      * Select all users

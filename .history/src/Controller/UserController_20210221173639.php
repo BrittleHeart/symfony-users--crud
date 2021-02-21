@@ -78,7 +78,7 @@ class UserController extends AbstractController {
 
 
     /**
-     * @Route("admin/users", name="user-index", methods="GET")
+     * @Route("/users", name="user-index", methods="GET")
      * 
      * 
      * Select all users
@@ -108,7 +108,7 @@ class UserController extends AbstractController {
 
 
     /**
-     * @Route("admin/users/edit/{id}", name="user-edit", methods="GET")
+     * @Route("/users/edit/{id}", name="user-edit", methods="GET")
      * 
      * 
      * Allows edit user with form
@@ -145,7 +145,7 @@ class UserController extends AbstractController {
 
 
     /**
-     * @Route("admin/users/{id}", name="user-update", methods="PUT")
+     * @Route("/users/{id}", name="user-update", methods="PUT")
      * 
      * 
      * Updates user's password
