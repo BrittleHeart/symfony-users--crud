@@ -27,9 +27,7 @@
 						<th scope="row">{{user.id}}</th>
 						<td>{{user.email}}</td>
 						<td>{{user.createdAt|date('Y-m-d H:i:s')}}</td>
-						<td>
-							<a href="{{path('user-edit', {'id': user.id})}}" class="btn btn-primary">edit</a>
-						</td>
+						<td>a[href={{}}</td>
 					</tr>
         		{% endfor %}
 				</tbody>
