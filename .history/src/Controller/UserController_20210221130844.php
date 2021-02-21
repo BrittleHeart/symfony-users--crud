@@ -19,28 +19,8 @@ use App\Entity\User;
 use LogicException;
 
 class UserController extends AbstractController {
-
-    /**
-     * Get Psr/Log LoggerInterface
-     * 
-     * @var LoggerInterface $loggerInterface
-     */
     private LoggerInterface $logger;
-
-
-    /**
-     * Password hashing
-     * 
-     * @var UserPasswordEncoderInterface $encoder
-     */
     private UserPasswordEncoderInterface $encoder;
-
-
-    /**
-     * CSRF protection
-     * 
-     * @var CsrfTokenManagerInterface $csrfTokenManagerInterface
-     */
     private CsrfTokenManagerInterface $csrfTokenManagerInterface;
 
 

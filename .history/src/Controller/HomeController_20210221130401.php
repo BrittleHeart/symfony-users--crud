@@ -11,16 +11,14 @@ use UnexpectedValueException;
 class HomeController extends AbstractController {
 
     /**
-     * @Route("/", name="home", methods="GET")
-     * 
-     * 
-     * Loads main page
      * 
      * @return Response 
      * @throws LogicException 
      * @throws UnexpectedValueException 
      */
     function index(): Response {
+
+        if()
         return $this->render('home/home.html.twig');
     }
 }

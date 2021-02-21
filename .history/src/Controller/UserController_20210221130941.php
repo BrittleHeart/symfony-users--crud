@@ -27,20 +27,8 @@ class UserController extends AbstractController {
      */
     private LoggerInterface $logger;
 
-
-    /**
-     * Password hashing
-     * 
-     * @var UserPasswordEncoderInterface $encoder
-     */
+    
     private UserPasswordEncoderInterface $encoder;
-
-
-    /**
-     * CSRF protection
-     * 
-     * @var CsrfTokenManagerInterface $csrfTokenManagerInterface
-     */
     private CsrfTokenManagerInterface $csrfTokenManagerInterface;
 
 

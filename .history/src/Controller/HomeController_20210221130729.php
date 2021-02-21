@@ -21,6 +21,7 @@ class HomeController extends AbstractController {
      * @throws UnexpectedValueException 
      */
     function index(): Response {
+        if($this->get('twig')->getLoader()->)
         return $this->render('home/home.html.twig');
     }
 }

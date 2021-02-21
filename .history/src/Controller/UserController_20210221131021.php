@@ -27,7 +27,6 @@ class UserController extends AbstractController {
      */
     private LoggerInterface $logger;
 
-
     /**
      * Password hashing
      * 

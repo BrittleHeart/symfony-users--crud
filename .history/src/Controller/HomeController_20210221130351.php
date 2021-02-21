@@ -11,10 +11,6 @@ use UnexpectedValueException;
 class HomeController extends AbstractController {
 
     /**
-     * @Route("/", name="home", methods="GET")
-     * 
-     * 
-     * Loads main page
      * 
      * @return Response 
      * @throws LogicException 

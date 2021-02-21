@@ -19,39 +19,10 @@ use App\Entity\User;
 use LogicException;
 
 class UserController extends AbstractController {
-
-    /**
-     * Get Psr/Log LoggerInterface
-     * 
-     * @var LoggerInterface $loggerInterface
-     */
     private LoggerInterface $logger;
-
-
-    /**
-     * Password hashing
-     * 
-     * @var UserPasswordEncoderInterface $encoder
-     */
     private UserPasswordEncoderInterface $encoder;
-
-
-    /**
-     * CSRF protection
-     * 
-     * @var CsrfTokenManagerInterface $csrfTokenManagerInterface
-     */
     private CsrfTokenManagerInterface $csrfTokenManagerInterface;
 
-
-    /**
-     * Sets default services
-     * 
-     * @param LoggerInterface $loggerInterface 
-     * @param CsrfTokenManagerInterface $csrfTokenManagerInterface 
-     * @param UserPasswordEncoderInterface $encoder 
-     * @return void 
-     */
     public function __construct(LoggerInterface $loggerInterface, CsrfTokenManagerInterface $csrfTokenManagerInterface, UserPasswordEncoderInterface $encoder)
     {
         $this->logger = $loggerInterface;
@@ -59,12 +30,7 @@ class UserController extends AbstractController {
         $this->csrfTokenManagerInterface = $csrfTokenManagerInterface;
     }
 
-
     /**
-     * @Route("/users", name="user-index", methods="GET")
-     * 
-     * 
-     * Select all users
      * 
      * @return Response 
      * @throws LogicException 
@@ -88,7 +54,6 @@ class UserController extends AbstractController {
             "users" => $users
         ]);
     }
-
 
     /**
      * @Route("/users/edit/{id}", name="user-edit", methods="GET")
@@ -124,7 +89,6 @@ class UserController extends AbstractController {
             "form" => $form->createView()
         ]);
     }
-
 
     /**
      * @Route("/users/{id}", name="user-update", methods="PUT")
@@ -170,7 +134,6 @@ class UserController extends AbstractController {
 
         return $this->redirect('/users');
     }
-
 
     /**
      * @Route("/users/delete/{id}", name="user-delete", methods="GET")
