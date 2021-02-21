@@ -8,10 +8,6 @@
 <div class="alert alert-danger">{{form_error}}</div>
 {% endif %}
 
-{% if form_succeed %}
-<div class="alert alert-success">{{form_succeed}}</div>
-{% endif %}
-
 {{ form_start(form, {method: 'PUT'}) }}
     <div class="mb-3">
         {{ form_row(form.password, {'attr': {'class': 'form-control'}}) }}

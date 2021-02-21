@@ -15,7 +15,7 @@ class UpdateUserType extends AbstractType
     {
         $builder
             ->add('password', PasswordType::class, [
-                'required' => true
+                'req'
             ])
             ->add('update', SubmitType::class, ['label' => 'Update user'])
         ;

@@ -136,8 +136,7 @@ class UserController extends AbstractController {
             "user" => $user,
             "id" => $id,
             "form" => $form->createView(),
-            "form_error" => $this->session->get('form-error'),
-            "form_succeed" => $this->session->get('form-succeed')
+            "form_error" => $this->session->get('form-error')
         ]);
     }
 
@@ -193,9 +192,7 @@ class UserController extends AbstractController {
         $entityManagerInterface->persist($user);
         $entityManagerInterface->flush();
 
-        $this->session->set('form-succeed', 'Updated user');
-
-        return $this->redirectToRoute('user-edit', ['id' => $id]);
+        return $this->redirect('/users');
     }
 
 

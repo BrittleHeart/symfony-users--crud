@@ -9,8 +9,8 @@
 {% endif %}
 
 {% if form_succeed %}
-<div class="alert alert-success">{{form_succeed}}</div>
-{% endif %}
+{% else %}
+<div class="alert alert-success">{{form_succeed}}</div>{% endif %}
 
 {{ form_start(form, {method: 'PUT'}) }}
     <div class="mb-3">

@@ -136,8 +136,7 @@ class UserController extends AbstractController {
             "user" => $user,
             "id" => $id,
             "form" => $form->createView(),
-            "form_error" => $this->session->get('form-error'),
-            "form_succeed" => $this->session->get('form-succeed')
+            "form_error" => $this->session->get('form-error')
         ]);
     }
 
@@ -186,14 +185,13 @@ class UserController extends AbstractController {
         elseif(!empty($password) && $this->session->get('form-error'))
         {
             $this->session->remove('form-error');
+            $this->session->set('form-succe')
         }
     
         $user->setPassword($this->encoder->encodePassword($user, $password));
 
         $entityManagerInterface->persist($user);
         $entityManagerInterface->flush();
-
-        $this->session->set('form-succeed', 'Updated user');
 
         return $this->redirectToRoute('user-edit', ['id' => $id]);
     }

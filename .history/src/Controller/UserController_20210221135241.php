@@ -17,7 +17,6 @@ use Psr\Log\LoggerInterface;
 use App\Form\UpdateUserType;
 use App\Entity\User;
 use LogicException;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class UserController extends AbstractController {
 
@@ -46,14 +45,6 @@ class UserController extends AbstractController {
 
 
     /**
-     * Get session
-     * 
-     * @var SessionInterface
-     */
-    private SessionInterface $session;
-
-
-    /**
      * Sets default services
      * 
      * @param LoggerInterface $loggerInterface 
@@ -61,17 +52,11 @@ class UserController extends AbstractController {
      * @param UserPasswordEncoderInterface $encoder 
      * @return void 
      */
-    public function __construct(
-        LoggerInterface $loggerInterface, 
-        CsrfTokenManagerInterface $csrfTokenManagerInterface, 
-        UserPasswordEncoderInterface $encoder, 
-        SessionInterface $sessionInterface
-    )
+    public function __construct(LoggerInterface $loggerInterface, CsrfTokenManagerInterface $csrfTokenManagerInterface, UserPasswordEncoderInterface $encoder)
     {
         $this->logger = $loggerInterface;
         $this->encoder = $encoder;
         $this->csrfTokenManagerInterface = $csrfTokenManagerInterface;
-        $this->session = $sessionInterface;
     }
 
 
@@ -118,7 +103,7 @@ class UserController extends AbstractController {
      * @throws UnexpectedValueException
      * 
      */
-    public function edit(EntityManagerInterface $entityManagerInterface, int $id): Response
+    public function edit(EntityManagerInterface $entityManagerInterface, Request $req, int $id): Response
     {
         $user = $entityManagerInterface
                     ->getRepository(User::class)
@@ -132,12 +117,26 @@ class UserController extends AbstractController {
 
         $form = $this->createForm(UpdateUserType::class, $user, ['action' => $this->generateUrl('user-update', ['id' => $id])]);
 
+        $form->handleRequest($req);
+        if ($form->isSubmitted() && $form->isValid()) {
+            // $form->getData() holds the submitted values
+            // but, the original `$task` variable has also been updated
+            $user = $form->getData();
+
+            // ... perform some action, such as saving the task to the database
+            // for example, if Task is a Doctrine entity, save it!
+            // $entityManager = $this->getDoctrine()->getManager();
+            // $entityManager->persist($task);
+            // $entityManager->flush();
+
+            return $this->redirectToRoute('user-update', ['id' => $id]);
+        }
+
+
         return $this->render('users/edit.html.twig', [
             "user" => $user,
             "id" => $id,
-            "form" => $form->createView(),
-            "form_error" => $this->session->get('form-error'),
-            "form_succeed" => $this->session->get('form-succeed')
+            "form" => $form->createView()
         ]);
     }
 
@@ -180,22 +179,15 @@ class UserController extends AbstractController {
 
         if(empty($password))
         {
-            $this->session->set('form-error', 'Password is required');
-            return $this->redirectToRoute('user-edit', ['id' => $id]);
+           return $this->redirectToRoute('/users');
         }
-        elseif(!empty($password) && $this->session->get('form-error'))
-        {
-            $this->session->remove('form-error');
-        }
-    
+        
         $user->setPassword($this->encoder->encodePassword($user, $password));
 
         $entityManagerInterface->persist($user);
         $entityManagerInterface->flush();
 
-        $this->session->set('form-succeed', 'Updated user');
-
-        return $this->redirectToRoute('user-edit', ['id' => $id]);
+        return $this->redirect('/users');
     }
 
 

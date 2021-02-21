@@ -17,7 +17,6 @@ use Psr\Log\LoggerInterface;
 use App\Form\UpdateUserType;
 use App\Entity\User;
 use LogicException;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class UserController extends AbstractController {
 
@@ -46,14 +45,6 @@ class UserController extends AbstractController {
 
 
     /**
-     * Get session
-     * 
-     * @var SessionInterface
-     */
-    private SessionInterface $session;
-
-
-    /**
      * Sets default services
      * 
      * @param LoggerInterface $loggerInterface 
@@ -61,17 +52,11 @@ class UserController extends AbstractController {
      * @param UserPasswordEncoderInterface $encoder 
      * @return void 
      */
-    public function __construct(
-        LoggerInterface $loggerInterface, 
-        CsrfTokenManagerInterface $csrfTokenManagerInterface, 
-        UserPasswordEncoderInterface $encoder, 
-        SessionInterface $sessionInterface
-    )
+    public function __construct(LoggerInterface $loggerInterface, CsrfTokenManagerInterface $csrfTokenManagerInterface, UserPasswordEncoderInterface $encoder)
     {
         $this->logger = $loggerInterface;
         $this->encoder = $encoder;
         $this->csrfTokenManagerInterface = $csrfTokenManagerInterface;
-        $this->session = $sessionInterface;
     }
 
 
@@ -124,20 +109,21 @@ class UserController extends AbstractController {
                     ->getRepository(User::class)
                     ->find(intval($id));
 
+        $form = $this->createForm(UpdateUserType::class, $user, ['action' => $this->generateUrl('user-update', ['id' => $id])]);
+
+        
+
         if(!$user)
         {
             $this->logger->warning("User with id = $id, does not exists");
             return $this->redirect('/users', 302);
         }
 
-        $form = $this->createForm(UpdateUserType::class, $user, ['action' => $this->generateUrl('user-update', ['id' => $id])]);
 
         return $this->render('users/edit.html.twig', [
             "user" => $user,
             "id" => $id,
-            "form" => $form->createView(),
-            "form_error" => $this->session->get('form-error'),
-            "form_succeed" => $this->session->get('form-succeed')
+            "form" => $form->createView()
         ]);
     }
 
@@ -176,26 +162,15 @@ class UserController extends AbstractController {
             throw new NotFoundHttpException('Could not find user');
         }
 
-        $password = htmlspecialchars($form_fields['password']);
 
-        if(empty($password))
-        {
-            $this->session->set('form-error', 'Password is required');
-            return $this->redirectToRoute('user-edit', ['id' => $id]);
-        }
-        elseif(!empty($password) && $this->session->get('form-error'))
-        {
-            $this->session->remove('form-error');
-        }
-    
+        $password = htmlspecialchars($form_fields['password']);
+        
         $user->setPassword($this->encoder->encodePassword($user, $password));
 
         $entityManagerInterface->persist($user);
         $entityManagerInterface->flush();
 
-        $this->session->set('form-succeed', 'Updated user');
-
-        return $this->redirectToRoute('user-edit', ['id' => $id]);
+        return $this->redirect('/users');
     }
 
 

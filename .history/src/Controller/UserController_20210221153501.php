@@ -132,12 +132,12 @@ class UserController extends AbstractController {
 
         $form = $this->createForm(UpdateUserType::class, $user, ['action' => $this->generateUrl('user-update', ['id' => $id])]);
 
+        if($this->session->get('form-error'))
+
         return $this->render('users/edit.html.twig', [
             "user" => $user,
             "id" => $id,
-            "form" => $form->createView(),
-            "form_error" => $this->session->get('form-error'),
-            "form_succeed" => $this->session->get('form-succeed')
+            "form" => $form->createView()
         ]);
     }
 
@@ -183,19 +183,13 @@ class UserController extends AbstractController {
             $this->session->set('form-error', 'Password is required');
             return $this->redirectToRoute('user-edit', ['id' => $id]);
         }
-        elseif(!empty($password) && $this->session->get('form-error'))
-        {
-            $this->session->remove('form-error');
-        }
     
         $user->setPassword($this->encoder->encodePassword($user, $password));
 
         $entityManagerInterface->persist($user);
         $entityManagerInterface->flush();
 
-        $this->session->set('form-succeed', 'Updated user');
-
-        return $this->redirectToRoute('user-edit', ['id' => $id]);
+        return $this->redirect('/users');
     }
 
 

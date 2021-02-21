@@ -136,8 +136,7 @@ class UserController extends AbstractController {
             "user" => $user,
             "id" => $id,
             "form" => $form->createView(),
-            "form_error" => $this->session->get('form-error'),
-            "form_succeed" => $this->session->get('form-succeed')
+            "form_error" => $this->session->get('form-error')
         ]);
     }
 

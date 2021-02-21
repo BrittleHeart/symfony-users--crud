@@ -4,12 +4,8 @@
 
 <h1>Edit user with id = {{id}}</h1>
 
-{% if form_error %}
-<div class="alert alert-danger">{{form_error}}</div>
-{% endif %}
+{% if error %}
 
-{% if form_succeed %}
-<div class="alert alert-success">{{form_succeed}}</div>
 {% endif %}
 
 {{ form_start(form, {method: 'PUT'}) }}
