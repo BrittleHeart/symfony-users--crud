@@ -73,12 +73,11 @@ class UserController extends AbstractController {
             return $this->redirect('/users', 302);
         }
 
-        $form = $this->createForm(UpdateUserType::class, $user);
+        $form = $this->createForm(UpdateUserType::class);
 
         return $this->render('users/edit.html.twig', [
             "user" => $user,
-            "id" => $id,
-            "form" => $form->createView()
+            "id" => $id
         ]);
     }
 

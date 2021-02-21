@@ -11,7 +11,6 @@ use Doctrine\ORM\EntityManagerInterface;
 use UnexpectedValueException;
 use Psr\Log\LoggerInterface;
 use App\Entity\User;
-use App\Form\UpdateUserType;
 use LogicException;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -73,12 +72,11 @@ class UserController extends AbstractController {
             return $this->redirect('/users', 302);
         }
 
-        $form = $this->createForm(UpdateUserType::class, $user);
+        $form = $this->createForm()
 
         return $this->render('users/edit.html.twig', [
             "user" => $user,
-            "id" => $id,
-            "form" => $form->createView()
+            "id" => $id
         ]);
     }
 
