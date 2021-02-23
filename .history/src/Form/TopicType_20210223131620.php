@@ -13,7 +13,7 @@ class TopicType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title', TextType::class, ["placeholder" => 'topic title ..'])
+            ->add('title', TextType::class, [])
             ->add('slug', TextType::class, ["placeholder" => 'shorten name'])
             ->add('content')
             ->add('description')

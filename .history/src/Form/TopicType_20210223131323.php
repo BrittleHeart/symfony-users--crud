@@ -3,7 +3,6 @@
 namespace App\Form;
 
 use App\Entity\Topic;
-use Doctrine\DBAL\Types\TextType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -13,8 +12,8 @@ class TopicType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title', TextType::class, ["placeholder" => 'topic title ..'])
-            ->add('slug', TextType::class, ["placeholder" => 'shorten name'])
+            ->add('title', 'string')
+            ->add('slug')
             ->add('content')
             ->add('description')
             ->add('likes')
