@@ -36,9 +36,6 @@ class TopicController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
-
-            $topic->setCreatedAt(new \DateTime());
-
             $entityManager->persist($topic);
             $entityManager->flush();
 
@@ -82,7 +79,7 @@ class TopicController extends AbstractController
     }
 
     /**
-     * @Route("topic/{id}", name="topic_delete", methods={"DELETE"})
+     * @Route("/{id}", name="topic_delete", methods={"DELETE"})
      */
     public function delete(Request $request, Topic $topic): Response
     {

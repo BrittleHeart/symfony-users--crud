@@ -18,6 +18,7 @@ class TopicType extends AbstractType
             ->add('slug', TextType::class)
             ->add('content', TextareaType::class)
             ->add('description', TextType::class)
+            ->add('category', RelationOneToMany::class)
         ;
     }
 

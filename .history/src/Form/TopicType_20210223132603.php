@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Topic;
+use Symfony\Bundle\MakerBundle\Doctrine\RelationOneToMany;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -18,6 +19,7 @@ class TopicType extends AbstractType
             ->add('slug', TextType::class)
             ->add('content', TextareaType::class)
             ->add('description', TextType::class)
+            ->add('category', RelationOneToMany::class)
         ;
     }
 

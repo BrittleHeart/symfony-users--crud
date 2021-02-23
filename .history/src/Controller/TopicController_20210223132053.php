@@ -11,12 +11,12 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/admin")
+ * @Route("/topic")
  */
 class TopicController extends AbstractController
 {
     /**
-     * @Route("/topics", name="topic_index", methods={"GET"})
+     * @Route("admin/topics", name="topic_index", methods={"GET"})
      */
     public function index(TopicRepository $topicRepository): Response
     {
@@ -26,7 +26,7 @@ class TopicController extends AbstractController
     }
 
     /**
-     * @Route("topic/new", name="topic_new", methods={"GET","POST"})
+     * @Route("admin/topic/new", name="topic_new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
     {
@@ -36,9 +36,6 @@ class TopicController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
-
-            $topic->setCreatedAt(new \DateTime());
-
             $entityManager->persist($topic);
             $entityManager->flush();
 
@@ -62,7 +59,7 @@ class TopicController extends AbstractController
     }
 
     /**
-     * @Route("topic/{id}/edit", name="topic_edit", methods={"GET","POST"})
+     * @Route("admin/{id}/edit", name="topic_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Topic $topic): Response
     {
@@ -82,7 +79,7 @@ class TopicController extends AbstractController
     }
 
     /**
-     * @Route("topic/{id}", name="topic_delete", methods={"DELETE"})
+     * @Route("admin/{id}", name="topic_delete", methods={"DELETE"})
      */
     public function delete(Request $request, Topic $topic): Response
     {

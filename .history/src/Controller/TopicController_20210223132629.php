@@ -37,7 +37,7 @@ class TopicController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
 
-            $topic->setCreatedAt(new \DateTime());
+            $topic->
 
             $entityManager->persist($topic);
             $entityManager->flush();
