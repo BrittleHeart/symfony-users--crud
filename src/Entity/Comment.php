@@ -40,6 +40,11 @@ class Comment
      */
     private $users;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Topic::class, inversedBy="comments")
+     */
+    private $topic;
+
     public function __construct()
     {
         $this->users = new ArrayCollection();
@@ -106,6 +111,18 @@ class Comment
     public function removeUser(User $user): self
     {
         $this->users->removeElement($user);
+
+        return $this;
+    }
+
+    public function getTopic(): ?Topic
+    {
+        return $this->topic;
+    }
+
+    public function setTopic(?Topic $topic): self
+    {
+        $this->topic = $topic;
 
         return $this;
     }
