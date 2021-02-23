@@ -20,7 +20,7 @@ class TopicController extends AbstractController
      */
     public function index(TopicRepository $topicRepository): Response
     {
-        return $this->render('administration/topic/index.html.twig', [
+        return $this->render('topic/index.html.twig', [
             'topics' => $topicRepository->findAll(),
         ]);
     }
@@ -45,18 +45,18 @@ class TopicController extends AbstractController
             return $this->redirectToRoute('topic_index');
         }
 
-        return $this->render('administration/topic/new.html.twig', [
+        return $this->render('topic/new.html.twig', [
             'topic' => $topic,
             'form' => $form->createView(),
         ]);
     }
 
     /**
-     * @Route("/topic/{id}", name="topic_show", methods={"GET"})
+     * @Route("/admin/topic/{id}", name="topic_show", methods={"GET"})
      */
     public function show(Topic $topic): Response
     {
-        return $this->render('administration/topic/show.html.twig', [
+        return $this->render('topic/show.html.twig', [
             'topic' => $topic,
         ]);
     }
@@ -75,7 +75,7 @@ class TopicController extends AbstractController
             return $this->redirectToRoute('topic_index');
         }
 
-        return $this->render('administration/topic/edit.html.twig', [
+        return $this->render('topic/edit.html.twig', [
             'topic' => $topic,
             'form' => $form->createView(),
         ]);

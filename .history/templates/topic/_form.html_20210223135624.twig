@@ -1,0 +1,15 @@
+{{ form_start(form, {'attr': {'class': 'form'}}) }}
+    <div class="mb-3">
+        {{ form_row(form.title, {'attr': {'class': 'form-control'}}) }}
+    </div>
+    <div class="mb-3">
+        {{ form_row(form.slug, {'attr': {'class': 'form-control'}}) }}
+    </div>    
+    <div class="mb-3">
+        {{ form_row(form.content, {'attr': {'class': 'form-control'}}) }}
+    </div>    
+    <div class="mb-3">
+        {{ form_row(form.description, {'attr': {'class': 'form-control'}}) }}
+    </div>
+    <button class="btn">{{ button_label|default('Zapisz') }}</button>
+{{ form_end(form) }}

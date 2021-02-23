@@ -1,0 +1,12 @@
+{{ form_start(form, {'attr': {'class': 'form'}}) }}
+    <div class="mb-3">
+        {{ form_row(form.title, {'attr': {'class': 'form-control'}}) }}
+    </div>
+    <div class="mb-3">
+    </div>    
+    <div class="mb-3">
+    </div>    
+    <div class="mb-3">
+    </div>
+    <button class="btn">{{ button_label|default('Zapisz') }}</button>
+{{ form_end(form) }}
