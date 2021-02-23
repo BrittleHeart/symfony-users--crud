@@ -2,9 +2,7 @@
 
 namespace App\Controller\Admin;
 
-use App\Controller\Admin\CategoryCrudController;
-use App\Entity\Category;
-use App\Entity\Topic;
+use App\Controller\TopicCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
@@ -22,7 +20,7 @@ class DashboardController extends AbstractDashboardController
         // redirect to some CRUD controller
         $routeBuilder = $this->get(AdminUrlGenerator::class);
 
-        return $this->redirect($routeBuilder->setController(CategoryCrudController::class)->generateUrl());
+        return $this->redirect($routeBuilder->setController(TopicCrudController::class)->generateUrl());
 
         // you can also redirect to different pages depending on the current user
         // if ('jane' === $this->getUser()->getUsername()) {
@@ -44,8 +42,7 @@ class DashboardController extends AbstractDashboardController
 
     public function configureMenuItems(): iterable
     {
-        yield MenuItem::section('Dashboard', 'fa fa-home');
-        yield MenuItem::linkToCrud('Topics', 'fas fa-list', Topic::class);
-        yield MenuItem::linkToCrud('Categories', 'fas fa-book', Category::class);
+        yield MenuItem::linktoDashboard('Dashboard', 'fa fa-home');
+        // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
     }
 }
