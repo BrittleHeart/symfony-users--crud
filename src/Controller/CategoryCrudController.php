@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/admin/categories")
  */
-class CategoryController extends AbstractController
+class CategoryCrudController extends AbstractController
 {
     /**
      * @Route("/", name="category_index", methods={"GET"})
