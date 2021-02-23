@@ -53,12 +53,6 @@ class Topic
      */
     private $updated_at;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="topics")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $category;
-
     public function getId(): ?int
     {
         return $this->id;
@@ -144,18 +138,6 @@ class Topic
     public function setUpdatedAt(?\DateTimeInterface $updated_at): self
     {
         $this->updated_at = $updated_at;
-
-        return $this;
-    }
-
-    public function getCategory(): ?Category
-    {
-        return $this->category;
-    }
-
-    public function setCategory(?Category $category): self
-    {
-        $this->category = $category;
 
         return $this;
     }
