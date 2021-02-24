@@ -5,7 +5,6 @@ namespace App\Controller\Admin;
 use App\Controller\Admin\CategoryCrudController;
 use App\Entity\Category;
 use App\Entity\Topic;
-use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
@@ -50,8 +49,5 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::section('Blog');
         yield MenuItem::linkToCrud('Topics', 'fas fa-list', Topic::class);
         yield MenuItem::linkToCrud('Categories', 'fas fa-book', Category::class);
-
-        yield MenuItem::section('Users');
-        yield MenuItem::linkToCrud('Users', 'fas fa-user', User::class);
     }
 }
