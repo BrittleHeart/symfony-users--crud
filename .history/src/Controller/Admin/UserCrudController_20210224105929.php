@@ -40,7 +40,6 @@ class UserCrudController extends AbstractCrudController
             EmailField::new('email'),
             ArrayField::new('roles'),
             Field::new('password', 'New password')
-                ->onlyOnForms()
                 ->setFormType(RepeatedType::class)
                 ->setFormTypeOptions([
                     'type' => PasswordType::class,
@@ -88,12 +87,10 @@ class UserCrudController extends AbstractCrudController
     }
 
     /**
-     * Sets password encoder
-     * 
      * @required
      * 
      * @param UserPasswordEncoderInterface $passwordEncoder
-     * @return void
+     * @return
      */
     public function setEncoder(UserPasswordEncoderInterface $passwordEncoder): void
     {

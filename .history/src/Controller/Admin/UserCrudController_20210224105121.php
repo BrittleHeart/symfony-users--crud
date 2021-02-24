@@ -10,6 +10,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Dto\EntityDto;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\EmailField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\Field;
+use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -19,28 +20,17 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class UserCrudController extends AbstractCrudController
 {
-    /** @var UserPasswordEncoderInterface */
-    private $passwordEncoder;
-
     public static function getEntityFqcn(): string
     {
         return User::class;
     }
 
-
-    /**
-     * Configures form fields
-     * 
-     * @param string $pageName 
-     * @return iterable 
-     */
     public function configureFields(string $pageName): iterable
     {
         return [
             EmailField::new('email'),
             ArrayField::new('roles'),
-            Field::new('password', 'New password')
-                ->onlyOnForms()
+            Field::new('password', 'New password')->onlyOnForms()
                 ->setFormType(RepeatedType::class)
                 ->setFormTypeOptions([
                     'type' => PasswordType::class,
@@ -50,15 +40,6 @@ class UserCrudController extends AbstractCrudController
         ];
     }
 
-
-    /**
-     * Creates or edits form builder
-     * 
-     * @param EntityDto $entityDto 
-     * @param KeyValueStore $formOptions 
-     * @param AdminContext $context 
-     * @return FormBuilderInterface 
-     */
     public function createEditFormBuilder(EntityDto $entityDto, KeyValueStore $formOptions, AdminContext $context): FormBuilderInterface
     {
         $formBuilder = parent::createEditFormBuilder($entityDto, $formOptions, $context);
@@ -68,18 +49,8 @@ class UserCrudController extends AbstractCrudController
         return $formBuilder;
     }
 
-
-    /**
-     * Creates new form builder 
-     * 
-     * @param EntityDto $entityDto 
-     * @param KeyValueStore $formOptions 
-     * @param AdminContext $context 
-     * @return FormBuilderInterface 
-     */
     public function createNewFormBuilder(EntityDto $entityDto, KeyValueStore $formOptions, AdminContext $context): FormBuilderInterface
     {
-        /** @var AbstractCrudController::createFormBuilder(EntityDto $entityDto, KeyValueStore $formOptions, AdminContext $context)): FormBuilderInterface */
         $formBuilder = parent::createNewFormBuilder($entityDto, $formOptions, $context);
 
         $this->addEncodePasswordEventListener($formBuilder);
@@ -88,32 +59,20 @@ class UserCrudController extends AbstractCrudController
     }
 
     /**
-     * Sets password encoder
-     * 
      * @required
-     * 
-     * @param UserPasswordEncoderInterface $passwordEncoder
-     * @return void
      */
     public function setEncoder(UserPasswordEncoderInterface $passwordEncoder): void
     {
         $this->passwordEncoder = $passwordEncoder;
     }
 
-    
-    /**
-     * Encodes password
-     * 
-     * @param FormBuilderInterface $formBuilder 
-     * @return void 
-     */
     protected function addEncodePasswordEventListener(FormBuilderInterface $formBuilder)
     {
         $formBuilder->addEventListener(FormEvents::SUBMIT, function (FormEvent $event) {
             /** @var User $user */
             $user = $event->getData();
-            if ($user->getPassword()) {
-                $user->setPassword($this->passwordEncoder->encodePassword($user, $user->getPassword()));
+            if ($user->getPlainPassword()) {
+                $user->setPassword($this->passwordEncoder->encodePassword($user, $user->getPlainPassword()));
             }
         });
     }

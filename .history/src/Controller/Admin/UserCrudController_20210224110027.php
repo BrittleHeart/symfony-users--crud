@@ -40,7 +40,7 @@ class UserCrudController extends AbstractCrudController
             EmailField::new('email'),
             ArrayField::new('roles'),
             Field::new('password', 'New password')
-                ->onlyOnForms()
+                ->on
                 ->setFormType(RepeatedType::class)
                 ->setFormTypeOptions([
                     'type' => PasswordType::class,

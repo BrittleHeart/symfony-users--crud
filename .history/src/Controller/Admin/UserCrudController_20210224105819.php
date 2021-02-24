@@ -10,6 +10,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Dto\EntityDto;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\EmailField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\Field;
+use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -29,7 +30,7 @@ class UserCrudController extends AbstractCrudController
 
 
     /**
-     * Configures form fields
+     * 
      * 
      * @param string $pageName 
      * @return iterable 
@@ -40,7 +41,6 @@ class UserCrudController extends AbstractCrudController
             EmailField::new('email'),
             ArrayField::new('roles'),
             Field::new('password', 'New password')
-                ->onlyOnForms()
                 ->setFormType(RepeatedType::class)
                 ->setFormTypeOptions([
                     'type' => PasswordType::class,
@@ -88,12 +88,7 @@ class UserCrudController extends AbstractCrudController
     }
 
     /**
-     * Sets password encoder
-     * 
      * @required
-     * 
-     * @param UserPasswordEncoderInterface $passwordEncoder
-     * @return void
      */
     public function setEncoder(UserPasswordEncoderInterface $passwordEncoder): void
     {
