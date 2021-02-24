@@ -4,8 +4,6 @@ namespace App\Controller\Admin;
 
 use App\Entity\Comment;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
-use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 
 class CommentCrudController extends AbstractCrudController
 {
@@ -18,7 +16,6 @@ class CommentCrudController extends AbstractCrudController
     {
         return [
             TextEditorField::new('content'),
-            AssociationField::new('topic')
         ];
     }
 }
