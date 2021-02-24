@@ -202,4 +202,6 @@ class Topic
 
         return $this;
     }
+     $this->category;
+    }
 }

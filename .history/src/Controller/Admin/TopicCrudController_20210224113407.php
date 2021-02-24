@@ -25,7 +25,7 @@ class TopicCrudController extends AbstractCrudController
         return [
             AssociationField::new('category'),
             TextField::new('title'),
-            TextField::new('slug'),
+            TextareaField::new('slug'),
             TextEditorField::new('content'),
             TextareaField::new('description'),
             NumberField::new('likes')->onlyOnDetail(),

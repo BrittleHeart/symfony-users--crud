@@ -23,9 +23,9 @@ class TopicCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            AssociationField::new('category'),
+            AssociationField::new(Category::getCategory()),
             TextField::new('title'),
-            TextField::new('slug'),
+            TextareaField::new('slug'),
             TextEditorField::new('content'),
             TextareaField::new('description'),
             NumberField::new('likes')->onlyOnDetail(),

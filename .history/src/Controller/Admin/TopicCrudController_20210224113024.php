@@ -2,12 +2,8 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\Category;
 use App\Entity\Topic;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
-use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\SlugField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
@@ -23,13 +19,10 @@ class TopicCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            AssociationField::new('category'),
             TextField::new('title'),
-            TextField::new('slug'),
+            SlugField::new('slug'),
             TextEditorField::new('content'),
-            TextareaField::new('description'),
-            NumberField::new('likes')->onlyOnDetail(),
-            DateTimeField::new('created_at')->onlyOnDetail()
+            TextAr
         ];
     }
 }

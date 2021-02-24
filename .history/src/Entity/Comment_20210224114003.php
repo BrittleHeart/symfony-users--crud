@@ -48,7 +48,7 @@ class Comment
     public function __construct()
     {
         $this->users = new ArrayCollection();
-        $this->created_at = new \DateTime();
+        $this->created_at = new \DateTime()
     }
 
     public function getId(): ?int

@@ -202,4 +202,9 @@ class Topic
 
         return $this;
     }
+    
+    public function __toString()
+    {
+        return $this->category();
+    }
 }

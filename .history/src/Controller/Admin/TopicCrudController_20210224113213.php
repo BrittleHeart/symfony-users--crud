@@ -2,7 +2,6 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\Category;
 use App\Entity\Topic;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
@@ -25,7 +24,7 @@ class TopicCrudController extends AbstractCrudController
         return [
             AssociationField::new('category'),
             TextField::new('title'),
-            TextField::new('slug'),
+            SlugField::new('slug'),
             TextEditorField::new('content'),
             TextareaField::new('description'),
             NumberField::new('likes')->onlyOnDetail(),
