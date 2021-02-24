@@ -18,7 +18,9 @@ class CategoryCrudController extends AbstractCrudController
     {
         return [
             TextField::new('name'),
-            DateTimeField::new('created_at')->hideOnForm()
+            DateTimeField::new('created_at', )
+                ->setValue(new \DateTime())
+                ->hideOnForm()
         ];
     }
 }

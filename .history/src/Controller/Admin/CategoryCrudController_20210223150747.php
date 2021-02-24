@@ -4,7 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\Category;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
-use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
 class CategoryCrudController extends AbstractCrudController
@@ -18,7 +18,7 @@ class CategoryCrudController extends AbstractCrudController
     {
         return [
             TextField::new('name'),
-            DateTimeField::new('created_at')->hideOnForm()
+            TextEditorField::new('description'),
         ];
     }
 }

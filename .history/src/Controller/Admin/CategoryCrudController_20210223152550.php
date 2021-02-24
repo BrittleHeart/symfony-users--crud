@@ -9,7 +9,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
 class CategoryCrudController extends AbstractCrudController
 {
-    public static function getEntityFqcn(): string
+    public static function getEntityFqcn(Category $category): string
     {
         return Category::class;
     }
@@ -18,7 +18,9 @@ class CategoryCrudController extends AbstractCrudController
     {
         return [
             TextField::new('name'),
-            DateTimeField::new('created_at')->hideOnForm()
+            DateTimeField::new('created_at')
+                ->setValue(new \DateTime())
+                ->hideOnForm()
         ];
     }
 }

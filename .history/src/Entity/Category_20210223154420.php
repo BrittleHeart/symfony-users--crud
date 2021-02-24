@@ -42,7 +42,7 @@ class Category
     public function __construct()
     {
         $this->topics = new ArrayCollection();
-        $this->created_at = new \DateTime();
+        $this->cre
     }
 
     public function getId(): ?int

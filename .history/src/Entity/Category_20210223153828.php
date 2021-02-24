@@ -30,7 +30,7 @@ class Category
     private $topics;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=false, options={})
      */
     private $created_at;
 
@@ -97,9 +97,9 @@ class Category
         return $this->created_at;
     }
 
-    public function setCreatedAt(\DateTimeInterface $created_at): self
+    public function setCreatedAt(): self
     {
-        $this->created_at = $created_at;
+        $this->created_at = new \DateTime();
 
         return $this;
     }

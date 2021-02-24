@@ -30,7 +30,7 @@ class Category
     private $topics;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=false, options={"default": "CURRENT_TIMESTAMP"})
      */
     private $created_at;
 
@@ -42,7 +42,6 @@ class Category
     public function __construct()
     {
         $this->topics = new ArrayCollection();
-        $this->created_at = new \DateTime();
     }
 
     public function getId(): ?int
